@@ -1,0 +1,25 @@
+From: Christian Kastner <ckk@debian.org>
+Date: Tue, 6 Feb 2024 20:12:02 +0100
+Subject: Skip git if not installed
+
+This is only used during the clean stage. For a typical Debian package build,
+git will not be installed.
+
+Bug-Debian: https://bugs.debian.org/1046986
+---
+ Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile b/Makefile
+index fca2b58..07c8e51 100644
+--- a/Makefile
++++ b/Makefile
+@@ -41,7 +41,7 @@ distclean: clean
+ 	$(BUILD_FGREP) "#define LIBCAP_MAJOR $(VERSION)" libcap/include/sys/capability.h
+ 	$(BUILD_FGREP) "#define LIBCAP_MINOR $(MINOR)" libcap/include/sys/capability.h
+ 	@echo "Now validate that everything is checked in to a clean tree.."
+-	test -z "$$(git status --ignored -s)"
++	test -z "$$(test -x /usr/bin/git && git status --ignored -s)"
+ 	@echo "All good!"
+ 
+ release: distclean
