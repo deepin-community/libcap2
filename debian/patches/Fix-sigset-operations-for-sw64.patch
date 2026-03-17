@@ -1,0 +1,44 @@
+Description: Fix sigset operations for sw64 architecture
+ On sw64 architecture, sigset_t is not a simple integer type and cannot
+ be manipulated using bitwise operations directly. Replace custom macros
+ with standard POSIX sigemptyset() and sigaddset() functions which are
+ portable across all architectures.
+Author: Deepin Packages Builder <packages@deepin.org>
+Forwarded: no
+Last-Update: 2026-03-17
+
+--- libcap2-2.75.orig/psx/psx_calls.c
++++ libcap2-2.75/psx/psx_calls.c
+@@ -112,21 +112,6 @@
+ #define _psx_rt_sigaction(sig, act, oact)       \
+     syscall(SYS_rt_sigaction, sig, act, oact, sizeof(sigset_t))
+ 
+-#define _psx_sigemptyset(pmask) \
+-    memset(pmask, 0, sizeof(*(pmask)))
+-
+-#ifdef _NSIG_WORDS
+-
+-#define _psx_sigaddset(pmask, signo) \
+-    (pmask)->sig[(signo-1)/_NSIG_BPW] |= 1UL << (((signo-1)%_NSIG_BPW))
+-
+-#else /* ndef _NSIG_WORDS */
+-
+-#define _psx_sigaddset(pmask, signo) \
+-    *(pmask) |= 1UL << (signo-1)
+-
+-#endif /* def _NSIG_WORDS */
+-
+ #ifdef SA_RESTORER
+ /*
+  * Actual assembly code for this "function" is embedded in
+@@ -246,8 +231,8 @@
+     /*
+      * Block interrupts while potentially rewriting the handler.
+      */
+-    _psx_sigemptyset(&mask);
+-    _psx_sigaddset(&mask, psx_tracker.psx_sig);
++    sigemptyset(&mask);
++    sigaddset(&mask, psx_tracker.psx_sig);
+     _psx_rt_sigprocmask(SIG_BLOCK, &mask, &orig);
+     _psx_rt_sigaction(psx_tracker.psx_sig, NULL, &existing_sa);
+     if (existing_sa.sa_handler != (void *) &psx_posix_syscall_actor) {

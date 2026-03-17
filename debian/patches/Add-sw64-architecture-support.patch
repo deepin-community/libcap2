@@ -1,0 +1,12 @@
+--- libcap2-2.75.orig/psx/psx_calls.c
++++ libcap2-2.75/psx/psx_calls.c
+@@ -48,7 +48,8 @@
+     || defined(__mips__) || defined(__loongarch__) \
+     || defined(__powerpc__) || defined(__s390__) || defined(__riscv) \
+     || defined(__alpha__) || defined(__hppa__) || defined(__sh__) \
+-    || defined(__m68k__) || defined(__sparc__)
++    || defined(__m68k__) || defined(__sparc__) \
++    || defined(__sw64__)
+ 
+ #undef _NSIG
+ #undef _NSIG_BPW
