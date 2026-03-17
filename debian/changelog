@@ -1,3 +1,13 @@
+libcap2 (1:2.75-10deepin1) unstable; urgency=medium
+
+  * Add sw64 architecture support
+    - Add __sw64__ to psx/psx_calls.c architecture detection
+    - Fixes compilation error on sw64 systems:
+      "invalid operands to binary | (have 'sigset_t' and 'long unsigned int')"
+    - The sw64 (Sunway) architecture requires explicit handling of sigset_t
+
+ -- lichenggang <lichenggang@uniontech.com>  Tue, 17 Mar 2026 15:51:00 +0800
+
 libcap2 (1:2.75-10) unstable; urgency=medium
 
   * d/rules: Fix typo in override_dh_auto_clean
