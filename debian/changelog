@@ -1,3 +1,11 @@
+libcap2 (1:2.75-10deepin1) unstable; urgency=medium
+
+  * Apply patches from upstream:
+    - Address a potential TOCTOU race condition in cap_set_file()
+    Fixes: CVE-2026-4878
+
+ -- Tianyu Chen <sweetyfish@deepin.org>  Thu, 09 Apr 2026 14:34:21 +0800
+
 libcap2 (1:2.75-10) unstable; urgency=medium
 
   * d/rules: Fix typo in override_dh_auto_clean
