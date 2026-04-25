@@ -1,3 +1,11 @@
+libcap2 (1:2.75-10deepin1) unstable; urgency=medium
+
+  * CVE-2026-4878: Fix TOCTOU race condition in cap_set_file()
+    Use open(O_PATH|O_NOFOLLOW) to lock file before setting capabilities,
+    preventing symlink attacks.
+
+ -- deepin-ci-robot <packages@deepin.org>  Sat, 25 Apr 2026 15:43:00 +0800
+
 libcap2 (1:2.75-10) unstable; urgency=medium
 
   * d/rules: Fix typo in override_dh_auto_clean
