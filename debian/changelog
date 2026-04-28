@@ -1,3 +1,9 @@
+libcap2 (1:2.75-10deepin1) unstable; urgency=medium
+
+  * Fix CVE-2026-4878: Address TOCTOU race condition in cap_set_file()
+
+ -- deepin-ci-robot <packages@deepin.org>  Tue, 28 Apr 2026 20:06:55 +0800
+
 libcap2 (1:2.75-10) unstable; urgency=medium
 
   * d/rules: Fix typo in override_dh_auto_clean
