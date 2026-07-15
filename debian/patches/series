@@ -6,3 +6,4 @@ Add-support-for-some-less-mainstream-architectures.patch
 Extend-support-further-to-__m68k__-and-possibly-__sparc__.patch
 Be-more-systematic-using-the-kernel-signal-handler-APIs.patch
 Address-a-potential-TOCTOU-race-condition-in-cap_set_file.patch
+Add-sw64-architecture-support.patch
