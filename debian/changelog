@@ -1,34 +1,8 @@
-libcap2 (1:2.75-10deepin3) unstable; urgency=medium
+libcap2 (1:2.75-10+deb13u1) trixie; urgency=medium
 
-  * Rebuild with LTO enabled (dpkg vendor feature optimize/lto).
+  * Add patch fixing CVE-2026-4878 (TOCTOU race condition)
 
- -- tunaichao <tunaichao@uniontech.com>  Fri, 11 Sep 2026 16:17:46 +0800
-
-libcap2 (1:2.75-10deepin2) unstable; urgency=medium
-
-  * Add sw64 architecture support
-    - Add __sw64__ to psx/psx_calls.c architecture detection
-    - Fixes compilation error on sw64 systems:
-      "invalid operands to binary | (have 'sigset_t' and 'long unsigned int')"
-    - The sw64 (Sunway) architecture requires explicit handling of sigset_t
-    - Drop Fix-sigset-operations-for-sw64.patch: It replaced working internal
-      _psx_sigaddset/_psx_sigemptyset macros with POSIX sigaddset/sigemptyset,
-      but the local sigset_t is redefined as psx_sigset_t (8 bytes), while
-      glibc's sigemptyset expects a real sigset_t (128 bytes), causing a stack
-      buffer overflow and segfault in psx_test.
-
-    - Fix Add-sw64-architecture-support.patch: use __sw_64__ instead of __sw64__
-      (the sw64 cross-compiler defines __sw_64__, not __sw64__)
-
- -- lichenggang <lichenggang@deepin.org>  Wed, 15 Jul 2026 16:18:18 +0800
-
-libcap2 (1:2.75-10deepin1) unstable; urgency=medium
-
-  * Apply patches from upstream:
-    - Address a potential TOCTOU race condition in cap_set_file()
-    Fixes: CVE-2026-4878
-
- -- Tianyu Chen <sweetyfish@deepin.org>  Thu, 09 Apr 2026 14:34:21 +0800
+ -- Christian Kastner <ckk@debian.org>  Mon, 06 Apr 2026 22:11:41 +0200
 
 libcap2 (1:2.75-10) unstable; urgency=medium
 
